@@ -43,10 +43,25 @@ namespace GB_Platformer
             }
         }
 
+        public bool IsNotLooped(SpriteRenderer spriteRenderer)
+        {
+            bool isNotLooped = false;
+            if (_activeAnimations.TryGetValue(spriteRenderer, out CustomAnimation animation))
+            {
+                if (!animation.Loop && !animation.IsActive)
+                {
+                    isNotLooped = true;
+                }
+            }
+            return isNotLooped;
+        }
+
         public void StopAnimation(SpriteRenderer sprite)
         {
             if (_activeAnimations.ContainsKey(sprite))
+            {
                 _activeAnimations.Remove(sprite);
+            }
         }
 
         public void Execute()
