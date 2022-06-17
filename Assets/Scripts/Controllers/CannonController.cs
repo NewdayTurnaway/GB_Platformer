@@ -8,11 +8,11 @@ namespace GB_Platformer
         private readonly CannonShoot _cannonShoot;
         private readonly AimBarrel _aimBarrel;
 
-        public CannonController(CannonInfo cannonInfo, Transform targetTransform)
+        public CannonController(CannonInfo cannonInfo, Transform targetTransform, SpriteAnimator spriteAnimator)
         {
             _cannonInfo = cannonInfo;
             _aimBarrel = new(_cannonInfo, targetTransform);
-            _cannonShoot = new(targetTransform, _cannonInfo.EmitterTransform, _cannonInfo.BulletInfo, new ProjectileService());
+            _cannonShoot = new(targetTransform, _cannonInfo.EmitterTransform, _cannonInfo.BulletInfo, new ProjectileService(), spriteAnimator);
         }
 
         public void Execute()

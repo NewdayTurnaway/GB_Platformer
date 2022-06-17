@@ -5,26 +5,29 @@ namespace GB_Platformer
     [System.Serializable]
     internal sealed class PlayerInfo
     {
-        [SerializeField] private SpriteRenderer _playerSpriteRenderer;
-        [SerializeField] private SpriteAnimationsData _playerAnimationsData;
+        [SerializeField] private LevelObjectView _playerLevelObjectView;
+        [SerializeField] private Transform _headTransform;
 
         [Header("Settings")]
-        [SerializeField] private float _walkSpeed = 1;
-        [SerializeField] private float _animationsSpeed = 3;
-        [SerializeField] private float _jumpStartSpeed = 2;
+        [SerializeField] private float _runSpeed = 150;
+        [SerializeField] private float _animationsSpeed = 10;
+        [SerializeField] private float _jumpForce = 300;
         [SerializeField] private float _movingTresh = 0.1f;
-        [SerializeField] private float _flyTresh = 0.3f;
+        [SerializeField] private float _flyTresh = 0.1f;
         [SerializeField] private float _groundLevel = 0.1f;
         [SerializeField] private float _acceleration = -10f;
 
         private bool _doSomething;
 
-        public SpriteRenderer PlayerSpriteRenderer => _playerSpriteRenderer;
-        public SpriteAnimationsData PlayerAnimationsData => _playerAnimationsData;
+        public LevelObjectView PlayerLevelObjectView => _playerLevelObjectView;
+        public SpriteRenderer PlayerSpriteRenderer => PlayerLevelObjectView.SpriteRenderer;
+        public Rigidbody2D PlayerRigidbody2D => PlayerLevelObjectView.Rigidbody2D;
+        public Collider2D PlayerCollider2D => PlayerLevelObjectView.Collider2D;
+        public Transform HeadTransform => _headTransform;
 
-        public float WalkSpeed => _walkSpeed;
+        public float RunSpeed => _runSpeed;
         public float AnimationsSpeed => _animationsSpeed;
-        public float JumpStartSpeed => _jumpStartSpeed;
+        public float JumpForce => _jumpForce;
         public float MovingTresh => _movingTresh;
         public float FlyTresh => _flyTresh;
         public float GroundLevel => _groundLevel;
