@@ -14,14 +14,7 @@ namespace GB_Platformer
         public ObjectPool(GameObject prefab)
         {
             _prefab = prefab;
-            _root = new GameObject().SetName($"[{_prefab.name}]").transform;
-        }
-
-        public ObjectPool(Sprite sprite, Vector2 size)
-        {
-            _prefab = new GameObject().SetName(Constants.Name.BULLET_NAME).AddSprite(sprite, size);
-            _root = new GameObject().SetName($"[{_prefab.name}]").transform;
-            Push(_prefab);
+            _root = new GameObject($"[{_prefab.name}]").transform;
         }
 
         public GameObject Pop()
@@ -29,7 +22,8 @@ namespace GB_Platformer
             GameObject gameObject;
             if (_stack.Count == 0)
             {
-                gameObject = Object.Instantiate(_prefab).SetName(_prefab.name);
+                gameObject = Object.Instantiate(_prefab);
+                gameObject.name = _prefab.name;
             }
             else
             {

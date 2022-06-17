@@ -4,13 +4,11 @@ namespace GB_Platformer
 {
     internal sealed class AimBarrel : IExecute
     {
-        private readonly CannonInfo _cannonInfo;
         private readonly Transform _barrelTransform;
         private readonly Transform _aimTransform;
 
         public AimBarrel(CannonInfo cannonInfo, Transform targetTransform)
         {
-            _cannonInfo = cannonInfo;
             _barrelTransform = cannonInfo.BarrelTransform;
             _aimTransform = targetTransform;
         }

@@ -5,31 +5,33 @@ namespace GB_Platformer
 {
     internal sealed class CannonShoot
     {
+        private readonly SpriteAnimator _spriteAnimator;
         private readonly Transform _emitterTransform;
         private readonly BulletInfo _bulletInfo;
-        private readonly IProjectileBulletService _projectileService;
-        private readonly BulletMovement _bulletMovement;
+        private readonly IProjectileService _projectileService;
+        private readonly BulletPhysicsMovement _bulletPhysicsMovement;
 
-        private readonly Stack<GameObject> _stack = new();
+        private readonly Stack<ProjectileView> _stack = new();
         private float _timer;
-        private float _timerDestroy;
 
-        public CannonShoot(Transform targetTransform, Transform emitterTransform, BulletInfo bulletInfo, IProjectileBulletService viewServices)
+        public CannonShoot(Transform targetTransform, Transform emitterTransform, BulletInfo bulletInfo, 
+            IProjectileService viewServices, SpriteAnimator spriteAnimator)
         {
+            _spriteAnimator = spriteAnimator;
             _emitterTransform = emitterTransform;
             _bulletInfo = bulletInfo;
             _projectileService = viewServices;
-            _timerDestroy = _bulletInfo.TimeDestroy;
-            _bulletMovement = new(_bulletInfo, targetTransform);
+            _bulletPhysicsMovement = new(targetTransform);
         }
 
         public void MovementUpdate()
         {
-            CheckDestroy();
-            if (_stack.TryPop(out GameObject tempBullet))
+            foreach(ProjectileView item in _stack)
             {
-                _bulletMovement.MovementExecute(tempBullet);
-                _stack.Push(tempBullet);
+                if (item.gameObject.activeInHierarchy)
+                {
+                    CheckDestroy(item);
+                }
             }
         }
 
@@ -42,27 +44,32 @@ namespace GB_Platformer
             else
             {
                 _timer = _bulletInfo.Delay;
-                GameObject bullet = _projectileService.InstantiateBullet<SpriteRenderer>(_bulletInfo).gameObject;
-                _bulletMovement.Throw(bullet, _emitterTransform.position, _emitterTransform.up * _bulletInfo.StartSpeed);
+                ProjectileView bullet = _projectileService.Instantiate<ProjectileView>(_bulletInfo.Prefab);
+                _spriteAnimator.StartAnimation(bullet.SpriteRenderer, Track.Projectile, true, Constants.Variables.ANIMATIONS_SPEED);
+                bullet.SetAllFields(_bulletInfo);
+                _bulletPhysicsMovement.Throw(bullet, _emitterTransform.position, _emitterTransform.up * _bulletInfo.Force);
+                if (_stack.Contains(bullet))
+                {
+                    return;
+                }
+                bullet.DeathTimer = bullet.TimeDestroy;
                 _stack.Push(bullet);
             }
         }
 
-        public void CheckDestroy()
+        public void CheckDestroy(ProjectileView tempBullet)
         {
-            if (_timerDestroy > 0)
+            if (tempBullet.DeathTimer > 0)
             {
-                _timerDestroy -= Time.deltaTime;
+                tempBullet.DeathTimer -= Time.deltaTime;
             }
             else
             {
-                _timerDestroy = _bulletInfo.TimeDestroy;
-                
-                if(_stack.TryPop(out GameObject tempBullet))
-                {
-                    tempBullet.transform.position = _emitterTransform.transform.position;
-                    _projectileService.Destroy(tempBullet);
-                } 
+                tempBullet.DeathTimer = _bulletInfo.TimeDestroy;
+
+                tempBullet.transform.position = _emitterTransform.transform.position;
+                _spriteAnimator.StopAnimation(tempBullet.SpriteRenderer);
+                _projectileService.Destroy(tempBullet.gameObject);
             }
         }
     }
