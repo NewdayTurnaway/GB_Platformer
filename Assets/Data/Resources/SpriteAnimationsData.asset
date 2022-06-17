@@ -37,3 +37,15 @@ MonoBehaviour:
     Sprites:
     - {fileID: 7460046300004610927, guid: f1a66757792209c4fb24688e642132df, type: 3}
     - {fileID: 7034338576483803127, guid: f1a66757792209c4fb24688e642132df, type: 3}
+  - Track: 6
+    Sprites:
+    - {fileID: 6934013284892070054, guid: 97fdda38d05da6c498e4e7591cf6fb96, type: 3}
+    - {fileID: -7957278214813060823, guid: 97fdda38d05da6c498e4e7591cf6fb96, type: 3}
+    - {fileID: 1409549213185883415, guid: 97fdda38d05da6c498e4e7591cf6fb96, type: 3}
+    - {fileID: 4976274401295337057, guid: 97fdda38d05da6c498e4e7591cf6fb96, type: 3}
+  - Track: 7
+    Sprites:
+    - {fileID: 7441861488978599509, guid: c0fa2008dfcbee24389f92eb339a9e16, type: 3}
+    - {fileID: 8288915215451595207, guid: c0fa2008dfcbee24389f92eb339a9e16, type: 3}
+    - {fileID: 4668938655123782945, guid: c0fa2008dfcbee24389f92eb339a9e16, type: 3}
+    - {fileID: 5683539909772271658, guid: c0fa2008dfcbee24389f92eb339a9e16, type: 3}

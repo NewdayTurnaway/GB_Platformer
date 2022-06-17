@@ -4,15 +4,21 @@
     {
         public GameInitialization(Controllers controllers, GameData gameData)
         {
-            BackgroundLayerManager backgroundLayerManager = new(gameData.Camera, gameData.Background, gameData.BackCoefficient,
-                gameData.Midground, gameData.MidCoefficient,
-                gameData.Foreground, gameData.ForeCoefficient,
-                gameData.BackgroundColor1, gameData.BackgroundColor2);
+            CameraController cameraController = new(gameData.Camera.transform, gameData.PlayerInfo.PlayerSpriteRenderer.transform);
+            BackgroundLayerManager backgroundLayerManager = new(gameData.Camera, gameData.Paralax.Background, gameData.Paralax.BackCoefficient,
+                gameData.Paralax.Midground, gameData.Paralax.MidCoefficient,
+                gameData.Paralax.Foreground, gameData.Paralax.ForeCoefficient,
+                gameData.Paralax.BackgroundColor1, gameData.Paralax.BackgroundColor2);
 
-            SpriteAnimator spriteAnimator = new(gameData.PlayerAnimationsData);
-            spriteAnimator.StartAnimation(gameData.PlayerSpriteRenderer, Track.Idle, true, 10);
+            SpriteAnimator spriteAnimator = new(gameData.PlayerInfo.PlayerAnimationsData);
+            PlayerController playerController = new(gameData.PlayerInfo, spriteAnimator);
+            CannonController cannonController = new(gameData.CannonInfo, gameData.PlayerInfo.PlayerSpriteRenderer.transform);
+
+            controllers.Add(cameraController);
             controllers.Add(backgroundLayerManager);
             controllers.Add(spriteAnimator);
+            controllers.Add(playerController);
+            controllers.Add(cannonController);
         }
     }
 }
