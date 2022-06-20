@@ -122,7 +122,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &2620321174051465805
 MonoBehaviour:
@@ -136,11 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e489ac2d69295a145bf2dae204dfe876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 7052382730111441796}
-  _rigidbody2D: {fileID: -1991223357342313369}
   _delay: 1
   _timeDestroy: 3
-  _startSpeed: 5
+  _force: 5
   _radius: 0.03
   _groundLevel: 0
   _acceleration: -10

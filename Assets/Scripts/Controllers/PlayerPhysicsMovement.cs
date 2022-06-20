@@ -47,6 +47,7 @@ namespace GB_Platformer
 
             if (!isMove)
             {
+                _playerInfo.PlayerRigidbody2D.velocity = _playerInfo.PlayerRigidbody2D.velocity.Change(x: 0f);
                 return;
             }
 
