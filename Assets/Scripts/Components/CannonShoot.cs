@@ -21,7 +21,7 @@ namespace GB_Platformer
             _emitterTransform = emitterTransform;
             _bulletInfo = bulletInfo;
             _projectileService = viewServices;
-            _bulletPhysicsMovement = new(targetTransform);
+            _bulletPhysicsMovement = new();
         }
 
         public void MovementUpdate()

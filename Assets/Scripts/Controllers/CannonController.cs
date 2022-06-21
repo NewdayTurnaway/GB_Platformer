@@ -18,7 +18,10 @@ namespace GB_Platformer
         public void Execute()
         {
             _aimBarrel.Execute();
-            _cannonShoot.Shoot();
+            if(_aimBarrel.TargetInRange)
+            {
+                _cannonShoot.Shoot();
+            }
             _cannonShoot.MovementUpdate();
         }
     }
