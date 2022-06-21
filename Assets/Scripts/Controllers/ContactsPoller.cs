@@ -8,6 +8,7 @@ namespace GB_Platformer
         private readonly Collider2D _collider2D;
 
         public bool OnGround { get; private set; }
+        public Vector2 GroundVelocity { get; private set; }
         public bool HasLeftContacts { get; private set; }
         public bool HasRightContacts { get; private set; }
 
@@ -30,6 +31,13 @@ namespace GB_Platformer
                 if (normal.y > Constants.Variables.COLLISION_TRESH)
                 {
                     OnGround = true;
+
+                    GroundVelocity = Vector2.zero;
+
+                    if(rigidbody2D != null)
+                    {
+                        GroundVelocity = rigidbody2D.velocity;
+                    }
                 }
 
                 if (normal.x > Constants.Variables.COLLISION_TRESH && rigidbody2D == null)

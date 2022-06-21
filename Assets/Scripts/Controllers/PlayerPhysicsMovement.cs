@@ -83,7 +83,7 @@ namespace GB_Platformer
 
         private void JumpAddForce(bool isJump)
         {
-            if (isJump && Mathf.Abs(_playerInfo.PlayerRigidbody2D.velocity.y) <= _playerInfo.FlyTresh)
+            if (isJump && Mathf.Abs(_playerInfo.PlayerRigidbody2D.velocity.y - _contactsPoller.GroundVelocity.y) <= _playerInfo.FlyTresh)
             {
                 _playerInfo.PlayerRigidbody2D.AddForce(Vector2.up * _playerInfo.JumpForce);
             }

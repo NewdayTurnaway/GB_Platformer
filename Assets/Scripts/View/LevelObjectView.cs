@@ -14,7 +14,7 @@ namespace GB_Platformer
 
         void OnTriggerEnter2D(Collider2D collider)
         {
-            collider.gameObject.TryGetComponent<LevelObjectView>(out LevelObjectView levelObject);
+            collider.gameObject.TryGetComponent(out LevelObjectView levelObject);
             OnLevelObjectContact?.Invoke(levelObject);
         }
     } 

@@ -17,7 +17,7 @@ namespace GB_Platformer
             _coinViews = coinViews;
             _playerView.OnLevelObjectContact += OnLevelObjectContact;
 
-            foreach (var coinView in coinViews)
+            foreach (LevelObjectView coinView in coinViews)
             {
                 _spriteAnimator.StartAnimation(coinView.SpriteRenderer, Track.Coin, true, Constants.Variables.ANIMATIONS_SPEED);
             }

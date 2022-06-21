@@ -15,6 +15,7 @@
             CannonController cannonController = new(gameData.CannonInfo, gameData.PlayerInfo.HeadTransform, spriteAnimator);
 
             new CoinsManager(gameData.PlayerInfo.PlayerLevelObjectView, gameData.Coins, spriteAnimator);
+            new ElevatorManager(gameData.PlayerInfo.PlayerLevelObjectView, gameData.Elevators);
 
             controllers.Add(cameraController);
             controllers.Add(backgroundLayerManager);
