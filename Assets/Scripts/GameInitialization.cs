@@ -13,6 +13,7 @@
             SpriteAnimator spriteAnimator = new(gameData.SpriteAnimationsData);
             PlayerController playerController = new(gameData.PlayerInfo, spriteAnimator);
             CannonController cannonController = new(gameData.CannonInfo, gameData.PlayerInfo.HeadTransform, spriteAnimator);
+            EnemiesController enemiesController = new(gameData.EnemiesInfo, spriteAnimator);
 
             new CoinsManager(gameData.PlayerInfo.PlayerLevelObjectView, gameData.Coins, spriteAnimator);
             new ElevatorManager(gameData.PlayerInfo.PlayerLevelObjectView, gameData.Elevators);
@@ -22,6 +23,7 @@
             controllers.Add(spriteAnimator);
             controllers.Add(playerController);
             controllers.Add(cannonController);
+            controllers.Add(enemiesController);
         }
     }
 }

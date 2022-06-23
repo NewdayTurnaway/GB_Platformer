@@ -16,6 +16,7 @@ namespace GB_Platformer
         [SerializeField] private ParalaxInfo _paralaxInfo;
         [SerializeField] private PlayerInfo _playerInfo;
         [SerializeField] private CannonInfo _cannonInfo;
+        [SerializeField] private EnemiesInfo _enemiesInfo;
         
         public Camera Camera => _camera;
         public SpriteAnimationsData SpriteAnimationsData => _spriteAnimationsData;
@@ -24,6 +25,6 @@ namespace GB_Platformer
         public ParalaxInfo Paralax => _paralaxInfo;
         public PlayerInfo PlayerInfo => _playerInfo;
         public CannonInfo CannonInfo => _cannonInfo;
-
+        public EnemiesInfo EnemiesInfo => _enemiesInfo;
     }
 }
