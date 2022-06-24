@@ -20,5 +20,9 @@
             public const float COLLISION_TRESH = 0.1f;
             public const float ANIMATIONS_SPEED = 10f;
         }
+        public struct Layer
+        {
+            public const string PLAYER = "Player";
+        }
     }
 }

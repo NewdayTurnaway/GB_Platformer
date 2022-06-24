@@ -608,7 +608,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.057142854, y: 0}
-  m_ConnectedAnchor: {x: -0.0000000340598, y: -0.021428585}
+  m_ConnectedAnchor: {x: 0, y: -0.021428585}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1027,7 +1027,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.057142854, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: -0.0000000340598, y: 0}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1045,7 +1045,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1723104040173092639}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ChainBridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
