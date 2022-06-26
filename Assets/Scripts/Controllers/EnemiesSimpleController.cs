@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace GB_Platformer
 {
-    internal sealed class EnemiesSimpleController : IFixedExecute
+    internal sealed class EnemiesSimpleController : EnemiesControllerBase
     {
-        private readonly EnemiesInfo _enemiesInfo;
-        private readonly SpriteAnimator _spriteAnimator;
-        private readonly List<EnemyView> _enemyViews = new();
         private readonly List<SimplePatrolAI> _simplePatrolAIs = new();
 
-        public EnemiesSimpleController(EnemiesInfo enemiesInfo, SpriteAnimator spriteAnimator)
+        public EnemiesSimpleController(EnemiesInfo enemiesInfo, SpriteAnimator spriteAnimator) : base(enemiesInfo, spriteAnimator)
         {
-            _enemiesInfo = enemiesInfo;
-            _spriteAnimator = spriteAnimator;
             foreach (EnemyInfo enemyInfo in _enemiesInfo.EnemyInfos)
             {
                 _enemyViews.Add(enemyInfo.EnemyView);
@@ -22,7 +16,9 @@ namespace GB_Platformer
             }
         }
 
-        public void FixedExecute()
+        public override void Initialization() { }
+
+        public override void FixedExecute()
         {
             for (int i = 0; i < _enemyViews.Count; i++)
             {
@@ -32,22 +28,10 @@ namespace GB_Platformer
             }
         }
 
-        private Track CheckEnemyTrackIdle(EnemyType enemyType)
+        public override void Deinitialization()
         {
-            if (enemyType == EnemyType.Patrol)
-            {
-                return Track.Skeleton_Idle;
-            }
-            return Track.FlyingEye_Flight;
-        }
-
-        private Track CheckEnemyTrackWalk(EnemyType enemyType)
-        {
-            if (enemyType == EnemyType.Patrol)
-            {
-                return Track.Skeleton_Walk;
-            }
-            return Track.FlyingEye_Flight;
+            base.Deinitialization();
+            _simplePatrolAIs.Clear();
         }
     }
 }
