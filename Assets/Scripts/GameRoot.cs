@@ -29,5 +29,10 @@ namespace GB_Platformer
         {
             _controllers.FixedExecute();
         }
+
+        private void OnDestroy()
+        {
+            _controllers.Deinitialization();
+        }
     }
 }

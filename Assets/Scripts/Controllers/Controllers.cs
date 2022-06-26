@@ -2,12 +2,13 @@
 
 namespace GB_Platformer
 {
-    internal sealed class Controllers : IInitialization, IExecute, ILateExecute, IFixedExecute
+    internal sealed class Controllers : IInitialization, IExecute, ILateExecute, IFixedExecute, IDeinitialization
     {
         private readonly List<IInitialization> _initializations;
         private readonly List<IExecute> _executes;
         private readonly List<ILateExecute> _lateExecutes;
         private readonly List<IFixedExecute> _fixedExecutes;
+        private readonly List<IDeinitialization> _deinitializations;
 
         internal Controllers()
         {
@@ -15,6 +16,7 @@ namespace GB_Platformer
             _executes = new();
             _lateExecutes = new();
             _fixedExecutes = new();
+            _deinitializations = new();
         }
 
         internal Controllers Add(IController controller)
@@ -34,6 +36,10 @@ namespace GB_Platformer
             if (controller is IFixedExecute fixedExecute)
             {
                 _fixedExecutes.Add(fixedExecute);
+            }
+            if (controller is IDeinitialization deinitialization)
+            {
+                _deinitializations.Add(deinitialization);
             }
 
             return this;
@@ -68,6 +74,14 @@ namespace GB_Platformer
             for (int i = 0; i < _fixedExecutes.Count; i++)
             {
                 _fixedExecutes[i].FixedExecute();
+            }
+        }
+
+        public void Deinitialization()
+        {
+            for (int i = 0; i < _deinitializations.Count; i++)
+            {
+                _deinitializations[i].Deinitialization();
             }
         }
     }
