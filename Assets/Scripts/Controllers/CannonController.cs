@@ -17,6 +17,11 @@ namespace GB_Platformer
 
         public void Execute()
         {
+            if (!_cannonInfo.SpriteRenderer.gameObject.activeInHierarchy)
+            {
+                return;
+            }
+
             _aimBarrel.Execute();
             if(_aimBarrel.TargetInRange)
             {
