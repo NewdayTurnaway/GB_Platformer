@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace GB_Platformer
 {
@@ -52,7 +53,7 @@ namespace GB_Platformer
             {
                 _spriteAnimator.StartAnimation(_enemyViews[i].SpriteRenderer, CheckEnemyTrackWalk(_enemiesInfo.EnemyInfos[i].EnemyType), true, Constants.Variables.ANIMATIONS_SPEED);
 
-                if (_enemyViews[i].ProtectorAIPatrolPath.velocity.x == 0)
+                if (Mathf.Approximately(_enemyViews[i].ProtectorAIPatrolPath.velocity.x, 0))
                 {
                     return;
                 }
