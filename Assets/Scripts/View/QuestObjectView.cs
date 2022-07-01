@@ -7,14 +7,24 @@ namespace GB_Platformer
     internal sealed class QuestObjectView : MonoBehaviour
     {
         [SerializeField] private int _id;
-        [SerializeField] private Track _track;
-        [SerializeField] private Sprite _sprite;
+        [SerializeField] private Track _trackDefault;
+        [SerializeField] private Track _trackActive;
+
         private SpriteAnimator _spriteAnimator;
+        private SpriteRenderer _spriteRenderer;
+        private Collider2D _collider2D;
 
         public int Id => _id;
         public Action<LevelObjectView> OnObjectContact;
 
-        public SpriteRenderer SpriteRenderer => GetComponent<SpriteRenderer>();
+        public SpriteRenderer SpriteRenderer => _spriteRenderer;
+        public Collider2D Collider2D => _collider2D;
+
+        private void OnValidate()
+        {
+            _spriteRenderer = _spriteRenderer != null ? _spriteRenderer : GetComponent<SpriteRenderer>();
+            _collider2D = _collider2D != null ? _collider2D : GetComponent<Collider2D>();
+        }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -24,13 +34,13 @@ namespace GB_Platformer
 
         public void ProcessComplete()
         {
-            _spriteAnimator.StartAnimation(SpriteRenderer, _track, false, Constants.Variables.ANIMATIONS_SPEED);
+            _spriteAnimator.StartAnimation(SpriteRenderer, _trackActive, false, Constants.Variables.ANIMATIONS_SPEED);
         }
 
         public void ProcessActivate(SpriteAnimator spriteAnimator)
         {
-            SpriteRenderer.sprite = _sprite;
             _spriteAnimator = spriteAnimator;
+            _spriteAnimator.StartAnimation(SpriteRenderer, _trackDefault, true, Constants.Variables.ANIMATIONS_SPEED);
         }
     } 
 }

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a218a3ad3fc836c40b6829e5a44f6fcc, type: 3}
-  m_Name: QuestStoryData
+  m_Name: ResettableQuestStory
   m_EditorClassIdentifier: 
   _quests:
-  - {fileID: 11400000, guid: 3978205e4adab5448826f9db473ade13, type: 2}
-  - {fileID: 11400000, guid: e3cfab88356d55d4b85643622a93037f, type: 2}
-  - {fileID: 11400000, guid: 70e4cfff6200a9b4ca50e223843a4f00, type: 2}
-  _questStoryType: 0
+  - {fileID: 11400000, guid: d9b4615df19dbb74aa520f451bfef473, type: 2}
+  - {fileID: 11400000, guid: 35e9dcedde364934cbad9802e7655743, type: 2}
+  - {fileID: 11400000, guid: a25a98a16fa577e459ee4854ebc526d8, type: 2}
+  _questStoryType: 1

@@ -14,9 +14,11 @@ namespace GB_Platformer
 
         private float _deathTimer;
         private Vector3 _velocity;
+        private SpriteRenderer _spriteRenderer;
+        private Rigidbody2D _rigidbody2D;
 
-        public SpriteRenderer SpriteRenderer => GetComponent<SpriteRenderer>();
-        public Rigidbody2D Rigidbody2D => GetComponent<Rigidbody2D>();
+        public SpriteRenderer SpriteRenderer => _spriteRenderer;
+        public Rigidbody2D Rigidbody2D => _rigidbody2D;
         public float DeathTimer { get => _deathTimer; set => _deathTimer = value; }
         public Vector3 Velocity { get => _velocity; set => _velocity = value; }
         public float Delay { get => _delay; set => _delay = value; }
@@ -25,6 +27,12 @@ namespace GB_Platformer
         public float Radius { get => _radius; set => _radius = value; }
         public float GroundLevel { get => _groundLevel; set => _groundLevel = value; }
         public float Acceleration { get => _acceleration; set => _acceleration = value; }
+
+        private void OnValidate()
+        {
+            _spriteRenderer = _spriteRenderer != null ? _spriteRenderer : GetComponent<SpriteRenderer>();
+            _rigidbody2D = _rigidbody2D != null ? _rigidbody2D : GetComponent<Rigidbody2D>();
+        }
 
         public void SetAllFields(BulletInfo bulletInfo)
         {

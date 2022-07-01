@@ -18,7 +18,8 @@ namespace GB_Platformer
 
         private readonly Dictionary<QuestStoryType, Func<List<IQuest>, IQuestStory>> _questStoryFactories = new()
         {
-            { QuestStoryType.Common, questCollection => new QuestStory(questCollection) },
+            { QuestStoryType.Common, questCollection => new CommonQuestStory(questCollection) },
+            { QuestStoryType.Resettable, questCollection => new ResettableQuestStory(questCollection) },
         };
 
         private readonly List<IQuestStory> _questStories = new();
@@ -68,6 +69,10 @@ namespace GB_Platformer
 
         public void Deinitialization()
         {
+            foreach (IQuestStory questStory in _questStories)
+            {
+                questStory.Dispose();
+            }
             _questStories.Clear();
         }
     } 
