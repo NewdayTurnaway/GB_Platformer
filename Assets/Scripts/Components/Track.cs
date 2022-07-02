@@ -25,6 +25,10 @@
         FlyingEye_Death,
         FlyingEye_TakeHit,
         FlyingEye_Attack1,
-        FlyingEye_Attack2
+        FlyingEye_Attack2,
+        Chest_Default,
+        Chest_Active,
+        Checkpoint_Default,
+        Checkpoint_Active,
     }
 }

@@ -15,6 +15,7 @@
             CannonController cannonController = new(gameData.CannonInfo, gameData.PlayerInfo.HeadTransform, spriteAnimator);
             //EnemiesSimpleController enemiesSimpleController = new(gameData.EnemiesInfo, spriteAnimator);
             EnemiesController enemiesController = new(gameData.EnemiesInfo, gameData.PlayerInfo.PlayerLevelObjectView,spriteAnimator);
+            QuestsConfigurator questsConfigurator = new(gameData.QuestStoriesData, gameData.QuestObjects, spriteAnimator);
 
             new CoinsManager(gameData.PlayerInfo.PlayerLevelObjectView, gameData.Coins, spriteAnimator);
             new ElevatorManager(gameData.PlayerInfo.PlayerLevelObjectView, gameData.Elevators);
@@ -26,6 +27,7 @@
             controllers.Add(cannonController);
             //controllers.Add(enemiesSimpleController);
             controllers.Add(enemiesController);
+            controllers.Add(questsConfigurator);
         }
     }
 }
