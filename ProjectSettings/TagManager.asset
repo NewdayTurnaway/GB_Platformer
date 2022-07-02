@@ -14,7 +14,7 @@ TagManager:
   - PathfidingObstacle
   - Enemy
   - LevelObject
-  - 
+  - PlayerIgnore
   - 
   - 
   - 

@@ -10,8 +10,6 @@ namespace GB_Platformer
         {
             foreach (EnemyInfo enemyInfo in _enemiesInfo.EnemyInfos)
             {
-                _enemyViews.Add(enemyInfo.EnemyView);
-                _spriteAnimator.StartAnimation(enemyInfo.EnemyView.SpriteRenderer, CheckEnemyTrackIdle(enemyInfo.EnemyType), true, Constants.Variables.ANIMATIONS_SPEED);
                 _simplePatrolAIs.Add(new SimplePatrolAI(enemyInfo.EnemyView, new SimplePatrolAIModel(enemyInfo)));
             }
         }
@@ -22,10 +20,37 @@ namespace GB_Platformer
         {
             for (int i = 0; i < _enemyViews.Count; i++)
             {
+                float health = _enemiesHealth[i];
+                ApplyDamage(ref health, _enemyViews[i], _enemiesInfo.EnemyInfos[i], out bool death);
+                _enemiesHealth[i] = health;
+
+                if (Death(death, i))
+                {
+                    continue;
+                }
+
+                if (_spriteAnimator.IsNotLooped(_enemyViews[i].SpriteRenderer))
+                {
+                    continue;
+                }
+
                 _simplePatrolAIs[i].FixedExecute();
-                _spriteAnimator.StartAnimation(_enemyViews[i].SpriteRenderer, CheckEnemyTrackWalk(_enemiesInfo.EnemyInfos[i].EnemyType), true, Constants.Variables.ANIMATIONS_SPEED);
-                _enemyViews[i].SpriteRenderer.flipX = _enemyViews[i].Rigidbody2D.velocity.x < 0;
+                _spriteAnimator.StartAnimation(_enemyViews[i].SpriteRenderer, CheckEnemyTrack(_enemiesInfo.EnemyInfos[i].EnemyType, false), true, Constants.Variables.ANIMATIONS_SPEED);
+                
+                bool facingRight = _facingRightList[i];
+                FlipHorizontally(ref facingRight, _enemyViews[i].ProtectorAIPatrolPath.velocity.x, _enemyViews[i].Transform);
+                _facingRightList[i] = facingRight;
             }
+        }
+
+        private protected override bool Death(bool death, int index)
+        {
+            base.Death(death, index);
+            if (death)
+            {
+                _simplePatrolAIs.Remove(_simplePatrolAIs[index]);
+            }
+            return death;
         }
 
         public override void Deinitialization()

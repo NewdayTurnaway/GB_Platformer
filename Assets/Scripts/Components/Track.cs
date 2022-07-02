@@ -2,6 +2,7 @@
 {
     public enum Track
     {
+        None,
         Idle,
         Run,
         Jump,

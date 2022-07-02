@@ -6,7 +6,7 @@ namespace GB_Platformer
     {
         public bool TryComplete(GameObject activator)
         {
-            return activator.TryGetComponent<LevelObjectView>(out _);
+            return activator.TryGetComponent<PlayerView>(out _);
         }
     }
 }

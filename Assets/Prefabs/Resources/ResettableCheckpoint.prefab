@@ -124,6 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e266509dba7fcd14c832e1d60d1c6dfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 2293776803645486066}
+  _collider2D: {fileID: 2099011352417506677}
   _id: 10
-  _trackDefault: 26
-  _trackActive: 27
+  _trackDefault: 27
+  _trackActive: 28

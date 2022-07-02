@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1064309481960233402}
   - component: {fileID: 1945491844693293706}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cannon_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3176240158501453429}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Emitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6936431741952515681}
   - component: {fileID: 4557879544178894960}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1893311903233823821}
   - component: {fileID: 6670569255982061304}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cannon_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

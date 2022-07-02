@@ -4,7 +4,7 @@
     {
         public GameInitialization(Controllers controllers, GameData gameData)
         {
-            CameraController cameraController = new(gameData.Camera.transform, gameData.PlayerInfo.PlayerLevelObjectView.transform);
+            CameraController cameraController = new(gameData.Camera.transform, gameData.PlayerInfo.PlayerView.transform);
             BackgroundLayerManager backgroundLayerManager = new(gameData.Camera, gameData.Paralax.Background, gameData.Paralax.BackCoefficient,
                 gameData.Paralax.Midground, gameData.Paralax.MidCoefficient,
                 gameData.Paralax.Foreground, gameData.Paralax.ForeCoefficient,
@@ -12,13 +12,13 @@
 
             SpriteAnimator spriteAnimator = new(gameData.SpriteAnimationsData);
             PlayerController playerController = new(gameData.PlayerInfo, spriteAnimator);
-            CannonController cannonController = new(gameData.CannonInfo, gameData.PlayerInfo.HeadTransform, spriteAnimator);
+            CannonController cannonController = new(gameData.CannonInfo, gameData.PlayerInfo.PlayerView.HeadTransform, spriteAnimator);
             //EnemiesSimpleController enemiesSimpleController = new(gameData.EnemiesInfo, spriteAnimator);
-            EnemiesController enemiesController = new(gameData.EnemiesInfo, gameData.PlayerInfo.PlayerLevelObjectView,spriteAnimator);
+            EnemiesController enemiesController = new(gameData.EnemiesInfo, gameData.PlayerInfo.PlayerView,spriteAnimator);
             QuestsConfigurator questsConfigurator = new(gameData.QuestStoriesData, gameData.QuestObjects, spriteAnimator);
 
-            new CoinsManager(gameData.PlayerInfo.PlayerLevelObjectView, gameData.Coins, spriteAnimator);
-            new ElevatorManager(gameData.PlayerInfo.PlayerLevelObjectView, gameData.Elevators);
+            new CoinsManager(gameData.PlayerInfo.PlayerView, gameData.Coins, spriteAnimator);
+            new ElevatorManager(gameData.PlayerInfo.PlayerView, gameData.Elevators);
 
             controllers.Add(cameraController);
             controllers.Add(backgroundLayerManager);

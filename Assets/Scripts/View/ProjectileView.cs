@@ -5,6 +5,8 @@ namespace GB_Platformer
     [RequireComponent(typeof(SpriteRenderer), typeof(Rigidbody2D), typeof(Collider2D))]
     internal sealed class ProjectileView : MonoBehaviour
     {
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private float _delay = 1;
         [SerializeField] private float _timeDestroy = 3;
         [SerializeField] private float _force = 5;
@@ -14,8 +16,6 @@ namespace GB_Platformer
 
         private float _deathTimer;
         private Vector3 _velocity;
-        private SpriteRenderer _spriteRenderer;
-        private Rigidbody2D _rigidbody2D;
 
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
         public Rigidbody2D Rigidbody2D => _rigidbody2D;

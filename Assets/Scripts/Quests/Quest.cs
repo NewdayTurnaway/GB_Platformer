@@ -27,14 +27,14 @@ namespace GB_Platformer
             }
             _isActive = true;
             IsCompleted = false;
-            _questObjectView.OnObjectContact += OnContact;
+            _questObjectView.OnPlayerContact += OnContact;
             _questObjectView.ProcessActivate(_spriteAnimator);
 
         }
 
         public void Dispose()
         {
-            _questObjectView.OnObjectContact -= OnContact;
+            _questObjectView.OnPlayerContact -= OnContact;
         }
 
         private void Complete()
@@ -45,7 +45,7 @@ namespace GB_Platformer
             }
             _isActive = false;
             IsCompleted = true;
-            _questObjectView.OnObjectContact -= OnContact;
+            _questObjectView.OnPlayerContact -= OnContact;
             _questObjectView.ProcessComplete();
             OnCompleted();
         }
@@ -55,9 +55,9 @@ namespace GB_Platformer
             Completed?.Invoke(this);
         }
 
-        private void OnContact(LevelObjectView levelObjectView)
+        private void OnContact(LevelObjectView playerView)
         {
-            bool completed = _questLogic.TryComplete(levelObjectView.gameObject);
+            bool completed = _questLogic.TryComplete(playerView.gameObject);
             if (completed)
             {
                 Complete();

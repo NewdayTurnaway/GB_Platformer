@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 namespace GB_Platformer
 {
@@ -13,12 +12,10 @@ namespace GB_Platformer
         {
             foreach (EnemyInfo enemyInfo in _enemiesInfo.EnemyInfos)
             {
-                _enemyViews.Add(enemyInfo.EnemyView);
                 if (!_levelObjectTriggers.Contains(enemyInfo.ProtectedZoneTrigger))
                 {
                     _levelObjectTriggers.Add(enemyInfo.ProtectedZoneTrigger);
                 }
-                _spriteAnimator.StartAnimation(enemyInfo.EnemyView.SpriteRenderer, CheckEnemyTrackIdle(enemyInfo.EnemyType), true, Constants.Variables.ANIMATIONS_SPEED);
                 _protectorAIs.Add(new ProtectorAI(targetView, new PatrolAIModel(enemyInfo.Waypoints),enemyInfo.EnemyView.ProtectorAIDestinationSetter, enemyInfo.EnemyView.ProtectorAIPatrolPath));
             }
             foreach (LevelObjectTrigger levelObjectTrigger in _levelObjectTriggers)
@@ -51,19 +48,43 @@ namespace GB_Platformer
         {
             for (int i = 0; i < _enemyViews.Count; i++)
             {
-                _spriteAnimator.StartAnimation(_enemyViews[i].SpriteRenderer, CheckEnemyTrackWalk(_enemiesInfo.EnemyInfos[i].EnemyType), true, Constants.Variables.ANIMATIONS_SPEED);
+                float health = _enemiesHealth[i];
+                ApplyDamage(ref health, _enemyViews[i], _enemiesInfo.EnemyInfos[i], out bool death);
+                _enemiesHealth[i] = health;
 
-                if (Mathf.Approximately(_enemyViews[i].ProtectorAIPatrolPath.velocity.x, 0))
+                if (Death(death, i))
                 {
-                    return;
+                    continue;
                 }
-                _enemyViews[i].SpriteRenderer.flipX = _enemyViews[i].ProtectorAIPatrolPath.velocity.x < 0;
+
+                if (_spriteAnimator.IsNotLooped(_enemyViews[i].SpriteRenderer))
+                {
+                    continue;
+                }
+
+                _spriteAnimator.StartAnimation(_enemyViews[i].SpriteRenderer, CheckEnemyTrack(_enemiesInfo.EnemyInfos[i].EnemyType, false), true, Constants.Variables.ANIMATIONS_SPEED);
+                
+                bool facingRight = _facingRightList[i];
+                FlipHorizontally(ref facingRight, _enemyViews[i].ProtectorAIPatrolPath.velocity.x, _enemyViews[i].Transform);
+                _facingRightList[i] = facingRight;
             }
+        }
+
+        private protected override bool Death(bool death, int index)
+        {
+            base.Death(death, index);
+            if (death)
+            {
+                _enemiesInfo.EnemyInfos[index].EnemyView.ProtectorAIDestinationSetter.enabled = false;
+                _enemiesInfo.EnemyInfos[index].EnemyView.ProtectorAIPatrolPath.enabled = false;
+            }
+            return death;
         }
 
         public override void Deinitialization()
         {
             base.Deinitialization();
+            _enemiesHealth.Clear();
             _levelObjectTriggers.Clear();
             foreach (ProtectorAI protectorAI in _protectorAIs)
             {

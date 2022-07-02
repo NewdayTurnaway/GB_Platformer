@@ -11,7 +11,7 @@ namespace GB_Platformer
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if(other.gameObject.layer == LayerMask.NameToLayer(Constants.Layer.PLAYER))
+            if(other.gameObject.GetComponent<PlayerView>())
             {
                 TriggerEnter?.Invoke(other.gameObject);
             }
@@ -19,7 +19,7 @@ namespace GB_Platformer
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer(Constants.Layer.PLAYER))
+            if (other.gameObject.GetComponent<PlayerView>())
             {
                 TriggerExit?.Invoke(other.gameObject);
             }
