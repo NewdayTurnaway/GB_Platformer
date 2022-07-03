@@ -8,6 +8,7 @@ namespace GB_Platformer
     {
         [SerializeField] private Health _health;
         [SerializeField] private Transform _transform;
+        [SerializeField] private Transform _targetWaypoint;
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private Collider2D _collider2D;
@@ -16,13 +17,14 @@ namespace GB_Platformer
 
         public Health Health => _health;
         public Transform Transform => _transform;
+        public Transform TargetWaypoint => _targetWaypoint;
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
         public Collider2D Collider2D => _collider2D;
         
         public AIDestinationSetter ProtectorAIDestinationSetter => _protectorAIDestinationSetter;
-
         public AIPatrolPath ProtectorAIPatrolPath => _protectorAIPatrolPath;
+
 
         private void OnValidate()
         {
@@ -33,6 +35,11 @@ namespace GB_Platformer
             _collider2D = _collider2D != null ? _collider2D : GetComponent<Collider2D>();
             _protectorAIDestinationSetter = _protectorAIDestinationSetter != null ? _protectorAIDestinationSetter : TryGetComponent(out AIDestinationSetter q) ? q : null;
             _protectorAIPatrolPath = _protectorAIPatrolPath != null ? _protectorAIPatrolPath : TryGetComponent(out AIPatrolPath qq) ? qq : null;
+
+            if (_transform.childCount >= 1)
+            {
+                _targetWaypoint = _targetWaypoint != null ? _targetWaypoint : _transform.GetChild(0).transform;
+            }
         }
 
         public void TakeDamage(float damage)

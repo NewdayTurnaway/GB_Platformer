@@ -16,7 +16,7 @@ namespace GB_Platformer
                 {
                     _levelObjectTriggers.Add(enemyInfo.ProtectedZoneTrigger);
                 }
-                _protectorAIs.Add(new ProtectorAI(targetView, new PatrolAIModel(enemyInfo.Waypoints),enemyInfo.EnemyView.ProtectorAIDestinationSetter, enemyInfo.EnemyView.ProtectorAIPatrolPath));
+                _protectorAIs.Add(new ProtectorAI(targetView.Transform, enemyInfo.EnemyView, enemyInfo.EnemyType, new PatrolAIModel(enemyInfo.Waypoints)));
             }
             foreach (LevelObjectTrigger levelObjectTrigger in _levelObjectTriggers)
             {
@@ -46,6 +46,10 @@ namespace GB_Platformer
 
         public override void FixedExecute()
         {
+            foreach (ProtectorAI protectorAI in _protectorAIs)
+            {
+                protectorAI.FixedExecute();
+            }
             for (int i = 0; i < _enemyViews.Count; i++)
             {
                 float health = _enemiesHealth[i];

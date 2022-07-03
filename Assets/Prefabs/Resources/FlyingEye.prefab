@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4167097409705107141}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1071959597
 BoxCollider2D:
@@ -82,10 +82,10 @@ GameObject:
   - component: {fileID: 4167097409705107141}
   - component: {fileID: 4167097409705107140}
   - component: {fileID: 4167097409705107143}
-  - component: {fileID: 4167097409705107142}
   - component: {fileID: 2752748705659286299}
-  - component: {fileID: 2003759897}
+  - component: {fileID: 4167097409705107142}
   - component: {fileID: 2003759899}
+  - component: {fileID: 2003759897}
   - component: {fileID: 2003759900}
   m_Layer: 7
   m_Name: FlyingEye
@@ -106,6 +106,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 8961086942419417664}
   - {fileID: 1071959595}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -178,31 +179,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 75421cecc40e97340a89a87536a54ec4, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4167097409705107142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4167097409705107137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 673a12715275da04c982ded2ff4d0703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health:
-    _maxHealth: 100
-  _transform: {fileID: 4167097409705107141}
-  _spriteRenderer: {fileID: 4167097409705107140}
-  _rigidbody2D: {fileID: 4167097409705107143}
-  _collider2D: {fileID: 2752748705659286299}
-  _protectorAIDestinationSetter: {fileID: 2003759897}
-  _protectorAIPatrolPath: {fileID: 2003759900}
 --- !u!58 &2752748705659286299
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -219,7 +200,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.15
---- !u!114 &2003759897
+--- !u!114 &4167097409705107142
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,11 +209,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 4167097409705107137}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
+  m_Script: {fileID: 11500000, guid: 673a12715275da04c982ded2ff4d0703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
-  target: {fileID: 0}
+  _health:
+    _maxHealth: 100
+  _transform: {fileID: 4167097409705107141}
+  _targetWaypoint: {fileID: 8961086942419417664}
+  _spriteRenderer: {fileID: 4167097409705107140}
+  _rigidbody2D: {fileID: 4167097409705107143}
+  _collider2D: {fileID: 2752748705659286299}
+  _protectorAIDestinationSetter: {fileID: 2003759897}
+  _protectorAIPatrolPath: {fileID: 2003759900}
 --- !u!114 &2003759899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,6 +249,20 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!114 &2003759897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4167097409705107137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  target: {fileID: 0}
 --- !u!114 &2003759900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,3 +305,34 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
+--- !u!1 &8052493178861260465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8961086942419417664}
+  m_Layer: 7
+  m_Name: TargetWaypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8961086942419417664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8052493178861260465}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4167097409705107141}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
