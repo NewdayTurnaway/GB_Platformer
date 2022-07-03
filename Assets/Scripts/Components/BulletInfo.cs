@@ -14,6 +14,7 @@ namespace GB_Platformer
         [SerializeField] private float _radius = 0.03f;
         [SerializeField] private float _groundLevel = 0;
         [SerializeField] private float _acceleration = -10;
+        [SerializeField] private float _damage = 10;
 
         public GameObject Prefab => _prefab;
         public float Radius => _radius;
@@ -22,5 +23,6 @@ namespace GB_Platformer
         public float Force => _force;
         public float GroundLevel => _groundLevel;
         public float Acceleration => _acceleration;
+        public float Damage => _damage;
     }
 }

@@ -2,21 +2,24 @@
 
 namespace GB_Platformer
 {
-    internal sealed class EnemiesController : EnemiesControllerBase
+    internal sealed class EnemiesController : EnemiesControllerBase, IExecute
     {
         private readonly List<LevelObjectTrigger> _levelObjectTriggers = new();
         private readonly List<ProtectorAI> _protectorAIs = new();
         private readonly List<ProtectedZone> _protectedZones = new();
+        private readonly List<EnemyAttack> _enemyAttacks = new();
 
         public EnemiesController(EnemiesInfo enemiesInfo, LevelObjectView targetView, SpriteAnimator spriteAnimator) : base(enemiesInfo, spriteAnimator)
         {
-            foreach (EnemyInfo enemyInfo in _enemiesInfo.EnemyInfos)
+            for (int i = 0; i < _enemiesInfo.EnemyInfos.Count; i++)
             {
+                EnemyInfo enemyInfo = _enemiesInfo.EnemyInfos[i];
                 if (!_levelObjectTriggers.Contains(enemyInfo.ProtectedZoneTrigger))
                 {
                     _levelObjectTriggers.Add(enemyInfo.ProtectedZoneTrigger);
                 }
-                _protectorAIs.Add(new ProtectorAI(targetView.Transform, enemyInfo.EnemyView, enemyInfo.EnemyType, new PatrolAIModel(enemyInfo.Waypoints)));
+                _protectorAIs.Add(new ProtectorAI(targetView.Transform, enemyInfo.EnemyView, enemyInfo, enemyInfo.EnemyType, new PatrolAIModel(enemyInfo.Waypoints)));
+                _enemyAttacks.Add(new EnemyAttack(enemyInfo, _spriteAnimator));
             }
             foreach (LevelObjectTrigger levelObjectTrigger in _levelObjectTriggers)
             {
@@ -44,6 +47,30 @@ namespace GB_Platformer
             }
         }
 
+        public void Execute()
+        {
+            foreach (EnemyAttack enemyAttack in _enemyAttacks)
+            {
+                enemyAttack.Execute();
+            }
+            for (int i = 0; i < _enemyViews.Count; i++)
+            {
+                if (_spriteAnimator.IsNotLooped(_enemyViews[i].SpriteRenderer))
+                {
+                    _enemyViews[i].ProtectorAIDestinationSetter.enabled = false;
+                    _enemyViews[i].ProtectorAIPatrolPath.enabled = false;
+                    continue;
+                }
+                if (UnityEngine.Mathf.Approximately(_enemiesHealth[i], 0f))
+                {
+                    continue;
+                }
+                _enemyViews[i].ProtectorAIDestinationSetter.enabled = true;
+                _enemyViews[i].ProtectorAIPatrolPath.enabled = true;
+            }
+            
+        }
+
         public override void FixedExecute()
         {
             foreach (ProtectorAI protectorAI in _protectorAIs)
@@ -58,6 +85,7 @@ namespace GB_Platformer
 
                 if (Death(death, i))
                 {
+                    _enemiesInfo.EnemyInfos[i].IsDeath = true;
                     continue;
                 }
 

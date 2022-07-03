@@ -52,7 +52,8 @@ namespace GB_Platformer
         {
             if (death)
             {
-                _enemyViews[index].gameObject.layer = LayerMask.NameToLayer(Constants.Layer.PLAYER_IGNORE);
+                _enemyViews[index].gameObject.layer = LayerMask.NameToLayer(Constants.Layer.IGNORED);
+                _enemyViews[index].Rigidbody2D.velocity = Vector3.zero;
             }
             return death;
         }

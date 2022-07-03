@@ -8,6 +8,8 @@ namespace GB_Platformer
         private readonly Transform _targetTransform;
         private readonly Transform _protectorTransform;
         private readonly Transform _targetWaypoint;
+        private readonly Transform _attackPointTransform;
+        private readonly EnemyInfo _enemyInfo;
         private readonly EnemyType _enemyType;
         private readonly PatrolAIModel _model;
         private readonly AIDestinationSetter _destinationSetter;
@@ -15,11 +17,13 @@ namespace GB_Platformer
 
         private bool _isPatrolling;
 
-        public ProtectorAI(Transform targetTransform, EnemyView enemyView, EnemyType enemyType, PatrolAIModel model)
+        public ProtectorAI(Transform targetTransform, EnemyView enemyView, EnemyInfo enemyInfo, EnemyType enemyType, PatrolAIModel model)
         {
             _targetTransform = targetTransform;
             _protectorTransform = enemyView.Transform;
             _targetWaypoint = enemyView.TargetWaypoint;
+            _attackPointTransform = enemyView.AttackPointTransform;
+            _enemyInfo = enemyInfo;
             _enemyType = enemyType;
             _model = model;
             _destinationSetter = enemyView.ProtectorAIDestinationSetter;
@@ -38,13 +42,19 @@ namespace GB_Platformer
             if (!_isPatrolling)
             {
                 _targetWaypoint.position = _targetTransform.position;
+
+                float distance = Vector2.Distance(_protectorTransform.position, _attackPointTransform.position);
+                _enemyInfo.InAttackDistance = distance < Constants.Variables.DELAY_ATTACK;
+
                 if (_enemyType == EnemyType.Patrol)
                 {
                     Vector3 position = _targetWaypoint.position;
                     position.Set(position.x, _protectorTransform.position.y, position.z);
                     _targetWaypoint.position = position;
                 }
+                return;
             }
+            _enemyInfo.InAttackDistance = false;
         }
 
         private Transform CorrectionWaypoint(Transform transform)
