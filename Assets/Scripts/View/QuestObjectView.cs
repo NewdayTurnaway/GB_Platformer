@@ -16,6 +16,7 @@ namespace GB_Platformer
 
         public int Id => _id;
         public Action<LevelObjectView> OnPlayerContact;
+        public Action<int> QuestItem;
 
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
         public Collider2D Collider2D => _collider2D;
@@ -37,6 +38,7 @@ namespace GB_Platformer
         public void ProcessComplete()
         {
             _spriteAnimator.StartAnimation(SpriteRenderer, _trackActive, false, Constants.Variables.ANIMATIONS_SPEED);
+            QuestItem?.Invoke(Id);
         }
 
         public void ProcessActivate(SpriteAnimator spriteAnimator)

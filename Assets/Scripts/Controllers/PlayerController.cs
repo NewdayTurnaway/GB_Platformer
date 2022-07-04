@@ -27,6 +27,11 @@ namespace GB_Platformer
                 return;
             }
             _playerApplyDamage.Execute();
+
+            if (!_playerInfo.Abilities.Weapon)
+            {
+                return;
+            }
             _playerAttack.Execute();
         }
 

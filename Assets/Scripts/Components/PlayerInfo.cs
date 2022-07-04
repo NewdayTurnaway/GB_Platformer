@@ -17,6 +17,7 @@ namespace GB_Platformer
         [SerializeField] private float _acceleration = -10f;
         [SerializeField] private float _damageAttack1 = 30f;
         [SerializeField] private float _damageAttack2 = 50f;
+        [SerializeField] private Abilities _abilities;
 
         private bool _doSomething;
         private bool _isJump;
@@ -35,7 +36,8 @@ namespace GB_Platformer
         public float Acceleration => _acceleration;
         public float DamageAttack1 => _damageAttack1;
         public float DamageAttack2 => _damageAttack2;
-
+        
+        public Abilities Abilities { get => _abilities; set => _abilities = value; }
         public bool DoSomething { get => _doSomething; set => _doSomething = value; }
         public bool InAir { get => _isJump; set => _isJump = value; }
     }

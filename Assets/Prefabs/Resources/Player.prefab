@@ -173,6 +173,8 @@ MonoBehaviour:
   _transform: {fileID: 1193949443971332047}
   _collider2D: {fileID: 1880869986560391833}
   _rigidbody2D: {fileID: 6197096891097703929}
+  _health:
+    _maxHealth: 100
   _headTransform: {fileID: 4754589632258995261}
   _attackPointTransform: {fileID: 8158462929628770733}
   _attackRange: 0.85

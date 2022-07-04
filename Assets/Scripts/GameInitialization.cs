@@ -9,8 +9,10 @@
                 gameData.Paralax.Midground, gameData.Paralax.MidCoefficient,
                 gameData.Paralax.Foreground, gameData.Paralax.ForeCoefficient,
                 gameData.Paralax.BackgroundColor1, gameData.Paralax.BackgroundColor2);
-
+            UIController uIController = new(gameData.UIView, gameData.PlayerInfo.PlayerView, gameData.QuestItemsData, gameData.QuestObjects, gameData.Coins.Count);
             SpriteAnimator spriteAnimator = new(gameData.SpriteAnimationsData);
+            AbilitiesController abilitiesController = new(gameData.PlayerInfo, gameData.QuestObjects);
+
             PlayerController playerController = new(gameData.PlayerInfo, spriteAnimator);
             CannonController cannonController = new(gameData.CannonInfo, gameData.PlayerInfo.PlayerView.HeadTransform, spriteAnimator);
             //EnemiesSimpleController enemiesSimpleController = new(gameData.EnemiesInfo, spriteAnimator);
@@ -22,7 +24,9 @@
 
             controllers.Add(cameraController);
             controllers.Add(backgroundLayerManager);
+            controllers.Add(uIController);
             controllers.Add(spriteAnimator);
+            controllers.Add(abilitiesController);
             controllers.Add(playerController);
             controllers.Add(cannonController);
             //controllers.Add(enemiesSimpleController);

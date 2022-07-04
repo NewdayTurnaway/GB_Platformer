@@ -9,14 +9,18 @@ namespace GB_Platformer
         [Header("Game Settings")]
         [SerializeField] private Camera _camera;
         [SerializeField] private SpriteAnimationsData _spriteAnimationsData;
+        [SerializeField] private UIView _uIView;
+
+        [Header("Level Objects")]
         [SerializeField] private List<LevelObjectView> _coins;
         [SerializeField] private List<LevelObjectView> _elevators;
 
         [Header("Quests")]
         [SerializeField] private QuestStoryData[] _questStoriesData;
         [SerializeField] private QuestObjectView[] _questObjects;
+        [SerializeField] private QuestItemsData _questItemsData;
 
-        [Header("Objects Settings")]
+        [Header("Units Settings")]
         [SerializeField] private ParalaxInfo _paralaxInfo;
         [SerializeField] private PlayerInfo _playerInfo;
         [SerializeField] private CannonInfo _cannonInfo;
@@ -24,10 +28,12 @@ namespace GB_Platformer
         
         public Camera Camera => _camera;
         public SpriteAnimationsData SpriteAnimationsData => _spriteAnimationsData;
+        public UIView UIView => _uIView;
         public List<LevelObjectView> Coins => _coins;
         public List<LevelObjectView> Elevators => _elevators;
         public QuestStoryData[] QuestStoriesData => _questStoriesData;
         public QuestObjectView[] QuestObjects => _questObjects;
+        public QuestItemsData QuestItemsData => _questItemsData;
         public ParalaxInfo Paralax => _paralaxInfo;
         public PlayerInfo PlayerInfo => _playerInfo;
         public CannonInfo CannonInfo => _cannonInfo;

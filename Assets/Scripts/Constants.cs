@@ -10,17 +10,14 @@
             public const string ATTACK2 = "Fire2";
         }
 
-        public struct Name
-        {
-            public const string BULLET_NAME = "Bullet";
-        }
-
         public struct Variables
         {
             public const float COLLISION_TRESH = 0.1f;
             public const float ANIMATIONS_SPEED = 10f;
             public const float DELAY_ATTACK = 2.5f;
             public const float ATTACK_DISTANCE = 0.25f;
+            public const float POTION_HEATH_POINT = 20f;
+            public const float MESSAGE_TIMER = 3f;
         }
         public struct Layer
         {

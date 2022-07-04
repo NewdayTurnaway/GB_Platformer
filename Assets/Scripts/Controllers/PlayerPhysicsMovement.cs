@@ -98,6 +98,11 @@ namespace GB_Platformer
             }
 
             _spriteAnimator.StartAnimation(_playerInfo.PlayerSpriteRenderer, _isMove ? Track.Run : Track.Idle, true, _playerInfo.AnimationsSpeed);
+
+            if (!_playerInfo.Abilities.AbleJump)
+            {
+                return;
+            }
             JumpAddForce(_isJump);
         }
 
