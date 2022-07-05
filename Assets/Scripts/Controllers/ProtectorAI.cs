@@ -43,8 +43,9 @@ namespace GB_Platformer
             {
                 _targetWaypoint.position = _targetTransform.position;
 
-                float distance = Vector2.Distance(_protectorTransform.position, _attackPointTransform.position);
-                _enemyInfo.InAttackDistance = distance < Constants.Variables.DELAY_ATTACK;
+                float distance = Vector2.Distance(_targetWaypoint.position, _attackPointTransform.position);
+                Debug.Log(distance);
+                _enemyInfo.InAttackDistance = distance < Constants.Variables.DELAY_ATTACK_DISTANCE;
 
                 if (_enemyType == EnemyType.Patrol)
                 {
@@ -91,6 +92,14 @@ namespace GB_Platformer
             _isPatrolling = true;
             _targetWaypoint.localPosition = Vector3.zero;
             _destinationSetter.target = CorrectionWaypoint(_model.GetClosestTarget(_targetWaypoint.position));
+        }
+
+        public void ResetPosition()
+        {
+            Transform WaypointTransform = CorrectionWaypoint(_model.GetNextTarget());
+            _protectorTransform.position = WaypointTransform.position;
+            _destinationSetter.target = WaypointTransform;
+            _isPatrolling = true;
         }
     }
 }

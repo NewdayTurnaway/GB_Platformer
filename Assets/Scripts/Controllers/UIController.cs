@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +12,6 @@ namespace GB_Platformer
         private readonly Text _currentHealthText;
         private readonly Text _maxHealthText;
         private readonly Text _currentCoinsText;
-        private readonly Text _maxCoinsText;
         private readonly List<Image> _itemImages;
         private readonly RectTransform _messageRectTransform;
         private readonly Image _messageImage;
@@ -22,17 +20,17 @@ namespace GB_Platformer
         private readonly QuestObjectView[] _questObjects;
 
         private float _messageTimer;
-        private bool _ShowMessage;
+        private bool _showMessage;
+        private bool _showRestartMessageOnce;
         private int _itemsCount;
 
-        public UIController(UIView uIView, PlayerView playerView, QuestItemsData questItemsData, QuestObjectView[] questObjects, float maxCoins)
+        public UIController(UIView uIView, PlayerView playerView, QuestItemsData questItemsData, QuestObjectView[] questObjects)
         {
             _playerView = playerView;
             _uiPanelRectTransform = uIView.UiPanelRectTransform;
             _currentHealthText = uIView.CurrentHealthText;
             _maxHealthText = uIView.MaxHealthText;
             _currentCoinsText = uIView.CurrentCoinsText;
-            _maxCoinsText = uIView.MaxCoinsText;
             _itemImages = uIView.ItemImages;
             _messageRectTransform = uIView.MessageRectTransform;
             _messageImage = uIView.MessageImage;
@@ -42,7 +40,6 @@ namespace GB_Platformer
 
             _maxHealthText.text = _playerView.Health.MaxHealth.ToString();
             _currentHealthText.text = _playerView.Health.CurrentHealth.ToString();
-            _maxCoinsText.text = maxCoins.ToString();
             _currentCoinsText.text = _playerView.CoinsCounter.ToString();
             LayoutRebuilder.ForceRebuildLayoutImmediate(_uiPanelRectTransform);
         }
@@ -67,8 +64,19 @@ namespace GB_Platformer
 
         public void Execute()
         {
-            _messageRectTransform.gameObject.SetActive(_ShowMessage);
-            if (!_ShowMessage)
+            if (_playerView.Death)
+            {
+                if (_showRestartMessageOnce)
+                {
+                    return;
+                }
+                ShowRestartMessage();
+                _showRestartMessageOnce = true;
+                return;
+            }
+
+            _messageRectTransform.gameObject.SetActive(_showMessage);
+            if (!_showMessage)
             {
                 return;
             }
@@ -81,8 +89,16 @@ namespace GB_Platformer
             else
             {
                 _messageTimer = 0;
-                _ShowMessage = false;
+                _showMessage = false;
             }
+        }
+
+        private void ShowRestartMessage()
+        {
+            _messageRectTransform.gameObject.SetActive(true);
+            _messageImage.gameObject.SetActive(false);
+            _messageText.text = Constants.Message.RESTART_MESSAGE;
+            LayoutRebuilder.ForceRebuildLayoutImmediate(_messageRectTransform);
         }
 
         public void Deinitialization()
@@ -102,11 +118,13 @@ namespace GB_Platformer
         {
             _currentHealthText.text = _playerView.Health.CurrentHealth.ToString();
             _maxHealthText.text = _playerView.Health.MaxHealth.ToString();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(_uiPanelRectTransform);
         }
 
         private void ChangeCoinsCounter()
         {
             _currentCoinsText.text = _playerView.CoinsCounter.ToString();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(_uiPanelRectTransform);
         }
 
         private void ApplyItem(int questItemId)
@@ -120,13 +138,13 @@ namespace GB_Platformer
             {
                 if(questItemId == _questItemDatas[i].QuestId)
                 {
-                    LayoutRebuilder.ForceRebuildLayoutImmediate(_uiPanelRectTransform);
                     _itemImages[_itemsCount].gameObject.SetActive(true);
                     _itemImages[_itemsCount].sprite = _questItemDatas[i].Sprite;
+                    LayoutRebuilder.ForceRebuildLayoutImmediate(_uiPanelRectTransform);
                     _itemsCount++;
 
-                    _ShowMessage = true;
-                    _messageRectTransform.gameObject.SetActive(_ShowMessage);
+                    _showMessage = true;
+                    _messageRectTransform.gameObject.SetActive(_showMessage);
                     _messageImage.sprite = _questItemDatas[i].Sprite;
                     _messageText.text = _questItemDatas[i].ItemDescription;
                     LayoutRebuilder.ForceRebuildLayoutImmediate(_messageRectTransform);

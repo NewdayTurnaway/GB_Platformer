@@ -10,7 +10,6 @@ namespace GB_Platformer
         [SerializeField] private Text _currentHealthText;
         [SerializeField] private Text _maxHealthText;
         [SerializeField] private Text _currentCoinsText;
-        [SerializeField] private Text _maxCoinsText;
         [SerializeField] private List<Image> _itemImages;
         [SerializeField] private RectTransform _messageRectTransform;
         [SerializeField] private Image _messageImage;
@@ -20,7 +19,6 @@ namespace GB_Platformer
         public Text CurrentHealthText => _currentHealthText;
         public Text MaxHealthText => _maxHealthText;
         public Text CurrentCoinsText => _currentCoinsText;
-        public Text MaxCoinsText => _maxCoinsText;
         public List<Image> ItemImages => _itemImages;
         public RectTransform MessageRectTransform => _messageRectTransform;
         public Image MessageImage => _messageImage;

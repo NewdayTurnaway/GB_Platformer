@@ -102,6 +102,15 @@ namespace GB_Platformer
             }
         }
 
+        public override void Reset()
+        {
+            base.Reset();
+            foreach (ProtectorAI protectorAI in _protectorAIs)
+            {
+                protectorAI.ResetPosition();
+            }
+        }
+
         private protected override bool Death(bool death, int index)
         {
             base.Death(death, index);

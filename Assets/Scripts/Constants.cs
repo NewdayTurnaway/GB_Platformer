@@ -14,7 +14,7 @@
         {
             public const float COLLISION_TRESH = 0.1f;
             public const float ANIMATIONS_SPEED = 10f;
-            public const float DELAY_ATTACK = 2.5f;
+            public const float DELAY_ATTACK_DISTANCE = 2.5f;
             public const float ATTACK_DISTANCE = 0.25f;
             public const float POTION_HEATH_POINT = 20f;
             public const float MESSAGE_TIMER = 3f;
@@ -24,6 +24,11 @@
             public const string PLAYER = "Player";
             public const string ENEMY = "Enemy";
             public const string IGNORED = "Ignored";
+        }
+
+        public struct Message
+        {
+            public const string RESTART_MESSAGE = "Press R to respawn!";
         }
     }
 }

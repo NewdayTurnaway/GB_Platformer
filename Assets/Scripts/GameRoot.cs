@@ -5,7 +5,8 @@ namespace GB_Platformer
     public sealed class GameRoot : MonoBehaviour
     {
         [SerializeField] private GameData _gameData;
-
+        
+        private GameData _currentGameData;
         private Controllers _controllers;
 
         private void Awake()
@@ -14,7 +15,7 @@ namespace GB_Platformer
             new GameInitialization(_controllers, _gameData);
             _controllers.Initialization();
         }
-
+        
         private void Update()
         {
             _controllers.Execute();

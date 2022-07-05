@@ -21,12 +21,13 @@ namespace GB_Platformer
 
         public void Execute()
         {
-            if (_playerApplyDamage.Death)
+            _playerApplyDamage.Execute();
+
+            if (_playerInfo.PlayerView.Death)
             {
                 _playerInfo.PlayerRigidbody2D.velocity = Vector3.zero;
                 return;
             }
-            _playerApplyDamage.Execute();
 
             if (!_playerInfo.Abilities.Weapon)
             {
@@ -37,7 +38,7 @@ namespace GB_Platformer
 
         public void FixedExecute()
         {
-            if (_playerApplyDamage.Death)
+            if (_playerInfo.PlayerView.Death)
             {
                 _playerInfo.PlayerRigidbody2D.velocity = Vector3.zero;
                 return;

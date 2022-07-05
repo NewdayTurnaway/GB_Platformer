@@ -9,15 +9,20 @@
                 gameData.Paralax.Midground, gameData.Paralax.MidCoefficient,
                 gameData.Paralax.Foreground, gameData.Paralax.ForeCoefficient,
                 gameData.Paralax.BackgroundColor1, gameData.Paralax.BackgroundColor2);
-            UIController uIController = new(gameData.UIView, gameData.PlayerInfo.PlayerView, gameData.QuestItemsData, gameData.QuestObjects, gameData.Coins.Count);
+            UIController uIController = new(gameData.UIView, gameData.PlayerInfo.PlayerView, gameData.QuestItemsData, gameData.QuestObjects);
             SpriteAnimator spriteAnimator = new(gameData.SpriteAnimationsData);
-            AbilitiesController abilitiesController = new(gameData.PlayerInfo, gameData.QuestObjects);
 
             PlayerController playerController = new(gameData.PlayerInfo, spriteAnimator);
-            CannonController cannonController = new(gameData.CannonInfo, gameData.PlayerInfo.PlayerView.HeadTransform, spriteAnimator);
-            //EnemiesSimpleController enemiesSimpleController = new(gameData.EnemiesInfo, spriteAnimator);
-            EnemiesController enemiesController = new(gameData.EnemiesInfo, gameData.PlayerInfo.PlayerView,spriteAnimator);
+            AbilitiesController abilitiesController = new(gameData.PlayerInfo, gameData.QuestObjects);
+            
             QuestsConfigurator questsConfigurator = new(gameData.QuestStoriesData, gameData.QuestObjects, spriteAnimator);
+
+            CannonController cannonController = new(gameData.CannonInfo, gameData.PlayerInfo.PlayerView.HeadTransform, spriteAnimator);
+            EnemiesController enemiesController = new(gameData.EnemiesInfo, gameData.PlayerInfo.PlayerView,spriteAnimator);
+
+            RespawnController respawnController = new(gameData.QuestObjects, gameData.GetQuestStory(QuestStoryType.Resettable), 
+                gameData.PlayerInfo.PlayerView, enemiesController);
+            ExitZone exitZone = new(gameData.ExitDoor, gameData.Exit, gameData.PlayerInfo, spriteAnimator);
 
             new CoinsManager(gameData.PlayerInfo.PlayerView, gameData.Coins, spriteAnimator);
             new ElevatorManager(gameData.PlayerInfo.PlayerView, gameData.Elevators);
@@ -26,12 +31,13 @@
             controllers.Add(backgroundLayerManager);
             controllers.Add(uIController);
             controllers.Add(spriteAnimator);
-            controllers.Add(abilitiesController);
             controllers.Add(playerController);
-            controllers.Add(cannonController);
-            //controllers.Add(enemiesSimpleController);
-            controllers.Add(enemiesController);
+            controllers.Add(abilitiesController);
             controllers.Add(questsConfigurator);
+            controllers.Add(cannonController);
+            controllers.Add(enemiesController);
+            controllers.Add(respawnController);
+            controllers.Add(exitZone);
         }
     }
 }

@@ -11,6 +11,8 @@ namespace GB_Platformer
         [SerializeField] private float _attackRange = 0.85f;
 
         private float _coinsCounter;
+        private bool _death;
+
 
         public Health Health => _health;
         public Action ChangeHeath;
@@ -19,6 +21,7 @@ namespace GB_Platformer
         public Transform AttackPointTransform => _attackPointTransform;
         public float AttackRange => _attackRange;
         public float CoinsCounter => _coinsCounter;
+        public bool Death { get => _death; set => _death = value; }
 
         protected override void OnValidate()
         {
@@ -33,9 +36,19 @@ namespace GB_Platformer
             }
         }
 
+        public void ResetHeath()
+        {
+            Health.CurrentHealth = Health.MaxHealth;
+            ChangeHeath?.Invoke();
+        }
+
         public void TakeDamage(float damage)
         {
             Health.CurrentHealth -= damage;
+            if (Mathf.Approximately(Health.CurrentHealth, 0f))
+            {
+                Death = true;
+            }
             ChangeHeath?.Invoke();
         }
 

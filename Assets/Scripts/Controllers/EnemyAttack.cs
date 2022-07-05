@@ -22,7 +22,7 @@ namespace GB_Platformer
             }
             if (!_enemyInfo.InAttackDistance)
             {
-                _timer = Constants.Variables.DELAY_ATTACK;
+                _timer = Constants.Variables.DELAY_ATTACK_DISTANCE;
                 return;
             }
 
@@ -32,7 +32,7 @@ namespace GB_Platformer
             }
             else
             {
-                _timer = Constants.Variables.DELAY_ATTACK;
+                _timer = Constants.Variables.DELAY_ATTACK_DISTANCE;
                 Attack(CheckEnemyTrack(_enemyInfo.EnemyType), _enemyInfo.DamageAttack);
             }
         }

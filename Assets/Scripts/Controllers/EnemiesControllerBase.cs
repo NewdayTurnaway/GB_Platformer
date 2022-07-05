@@ -18,7 +18,7 @@ namespace GB_Platformer
             foreach (EnemyInfo enemyInfo in _enemiesInfo.EnemyInfos)
             {
                 _enemyViews.Add(enemyInfo.EnemyView);
-                _enemiesHealth.Add(enemyInfo.EnemyView.Health.CurrentHealth);
+                _enemiesHealth.Add(enemyInfo.EnemyView.Health.MaxHealth);
                 _facingRightList.Add(false);
                 _spriteAnimator.StartAnimation(enemyInfo.EnemyView.SpriteRenderer, CheckEnemyTrack(enemyInfo.EnemyType), true, Constants.Variables.ANIMATIONS_SPEED);
             }
@@ -30,6 +30,15 @@ namespace GB_Platformer
             _enemyViews.Clear();
         }
         public abstract void FixedExecute();
+
+        public virtual void Reset()
+        {
+            for (int i = 0; i < _enemiesHealth.Count; i++)
+            {
+                _enemiesInfo.EnemyInfos[i].EnemyView.Health.CurrentHealth = _enemiesInfo.EnemyInfos[i].EnemyView.Health.MaxHealth;
+                _enemiesHealth[i] = _enemiesInfo.EnemyInfos[i].EnemyView.Health.MaxHealth;
+            }
+        }
 
         private protected void ApplyDamage(ref float savedHealth, EnemyView enemyView, EnemyInfo enemyInfo, out bool death)
         {
