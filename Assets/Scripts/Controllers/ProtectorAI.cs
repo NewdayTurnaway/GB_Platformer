@@ -44,7 +44,6 @@ namespace GB_Platformer
                 _targetWaypoint.position = _targetTransform.position;
 
                 float distance = Vector2.Distance(_targetWaypoint.position, _attackPointTransform.position);
-                Debug.Log(distance);
                 _enemyInfo.InAttackDistance = distance < Constants.Variables.DELAY_ATTACK_DISTANCE;
 
                 if (_enemyType == EnemyType.Patrol)

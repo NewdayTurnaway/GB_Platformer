@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3, y: 1.5}
+  m_Size: {x: 4.5, y: 3}
   m_EdgeRadius: 0
 --- !u!114 &1071959596
 MonoBehaviour:
@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6214b66354415b846be4a413c0f3aa83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _boxCollider2D: {fileID: 1071959597}
 --- !u!1 &3154374265683507939
 GameObject:
   m_ObjectHideFlags: 0
