@@ -13,7 +13,6 @@ namespace GB_Platformer
         private float _coinsCounter;
         private bool _death;
 
-
         public Health Health => _health;
         public Action ChangeHeath;
         public Action ChangeCoinsCounter;

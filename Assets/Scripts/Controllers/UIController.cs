@@ -38,6 +38,7 @@ namespace GB_Platformer
             _questItemDatas = questItemsData.QuestItemDatas;
             _questObjects = questObjects;
 
+            _playerView.ResetHeath();
             _maxHealthText.text = _playerView.Health.MaxHealth.ToString();
             _currentHealthText.text = _playerView.Health.CurrentHealth.ToString();
             _currentCoinsText.text = _playerView.CoinsCounter.ToString();

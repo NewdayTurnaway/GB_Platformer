@@ -29,11 +29,6 @@ namespace GB_Platformer
         {
             collider.gameObject.TryGetComponent(out LevelObjectView levelObject);
             OnLevelObjectContact?.Invoke(levelObject);
-            
-            if(collider.gameObject.TryGetComponent(out PlayerView playerView))
-            {
-                playerView.AddCoin();
-            }
         }
     } 
 }

@@ -18,13 +18,19 @@ namespace GB_Platformer
             foreach (EnemyInfo enemyInfo in _enemiesInfo.EnemyInfos)
             {
                 _enemyViews.Add(enemyInfo.EnemyView);
-                _enemiesHealth.Add(enemyInfo.EnemyView.Health.MaxHealth);
+                _enemiesHealth.Add(enemyInfo.EnemyView.Health.CurrentHealth);
                 _facingRightList.Add(false);
                 _spriteAnimator.StartAnimation(enemyInfo.EnemyView.SpriteRenderer, CheckEnemyTrack(enemyInfo.EnemyType), true, Constants.Variables.ANIMATIONS_SPEED);
             }
         }
 
-        public abstract void Initialization();
+        public virtual void Initialization()
+        {
+            foreach (EnemyView enemyView in _enemyViews)
+            {
+                enemyView.ResetHeath();
+            }
+        }
         public virtual void Deinitialization()
         {
             _enemyViews.Clear();
@@ -35,8 +41,9 @@ namespace GB_Platformer
         {
             for (int i = 0; i < _enemiesHealth.Count; i++)
             {
-                _enemiesInfo.EnemyInfos[i].EnemyView.Health.CurrentHealth = _enemiesInfo.EnemyInfos[i].EnemyView.Health.MaxHealth;
+                _enemyViews[i].Health.CurrentHealth = _enemiesInfo.EnemyInfos[i].EnemyView.Health.MaxHealth;
                 _enemiesHealth[i] = _enemiesInfo.EnemyInfos[i].EnemyView.Health.MaxHealth;
+                _enemyViews[i].gameObject.layer = LayerMask.NameToLayer(Constants.Layer.ENEMY);
             }
         }
 

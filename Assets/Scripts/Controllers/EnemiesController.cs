@@ -37,6 +37,7 @@ namespace GB_Platformer
 
         public override void Initialization()
         {
+            base.Initialization();
             foreach (ProtectorAI protectorAI in _protectorAIs)
             {
                 protectorAI.Initialization();

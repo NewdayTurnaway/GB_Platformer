@@ -47,6 +47,11 @@ namespace GB_Platformer
             }
         }
 
+        public void ResetHeath()
+        {
+            Health.CurrentHealth = Health.MaxHealth;
+        }
+
         public void TakeDamage(float damage)
         {
             Health.CurrentHealth -= damage;
