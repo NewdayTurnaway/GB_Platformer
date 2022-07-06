@@ -4,7 +4,7 @@ using UnityEngine;
 namespace GB_Platformer
 {
     [System.Serializable]
-    internal sealed class GameData
+    public sealed class GameData
     {
         [Header("Game Settings")]
         [SerializeField] private Camera _camera;
@@ -13,8 +13,7 @@ namespace GB_Platformer
         [SerializeField] private ParalaxInfo _paralaxInfo;
 
         [Header("Level Objects")]
-        [SerializeField] private List<LevelObjectView> _coins;
-        [SerializeField] private List<LevelObjectView> _elevators;
+        [SerializeField] private List<CoinView> _coins;
         [SerializeField] private DoorTriggerView _exitDoor;
         [SerializeField] private LevelObjectTrigger _exit;
 
@@ -30,18 +29,17 @@ namespace GB_Platformer
         
         public Camera Camera => _camera;
         public SpriteAnimationsData SpriteAnimationsData => _spriteAnimationsData;
-        public UIView UIView => _uIView;
-        public ParalaxInfo Paralax => _paralaxInfo;
-        public List<LevelObjectView> Coins => _coins;
-        public List<LevelObjectView> Elevators => _elevators;
-        public DoorTriggerView ExitDoor => _exitDoor;
-        public LevelObjectTrigger Exit => _exit;
+        internal UIView UIView => _uIView;
+        internal ParalaxInfo Paralax => _paralaxInfo;
+        internal List<CoinView> Coins => _coins;
+        internal DoorTriggerView ExitDoor => _exitDoor;
+        internal LevelObjectTrigger Exit => _exit;
         public QuestStoryData[] QuestStoriesData => _questStoriesData;
-        public QuestObjectView[] QuestObjects => _questObjects;
+        internal QuestObjectView[] QuestObjects => _questObjects;
         public QuestItemsData QuestItemsData => _questItemsData;
-        public PlayerInfo PlayerInfo => _playerInfo;
-        public CannonInfo CannonInfo => _cannonInfo;
-        public EnemiesInfo EnemiesInfo => _enemiesInfo;
+        internal PlayerInfo PlayerInfo => _playerInfo;
+        internal CannonInfo CannonInfo => _cannonInfo;
+        internal EnemiesInfo EnemiesInfo => _enemiesInfo;
 
         public QuestStoryData GetQuestStory(QuestStoryType type)
         {
@@ -53,6 +51,12 @@ namespace GB_Platformer
                 }
             }
             return default;
+        }
+
+        public void FindCoinsInScene()
+        {
+            _coins.Clear();
+            _coins = new(Object.FindObjectsOfType<CoinView>());
         }
     }
 }

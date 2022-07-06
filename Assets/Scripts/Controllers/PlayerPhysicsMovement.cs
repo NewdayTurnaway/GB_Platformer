@@ -54,11 +54,8 @@ namespace GB_Platformer
 
             SetVelocity(_inputHorizontal, Mathf.Lerp(0, _playerInfo.RunSpeed, Mathf.Abs(inputHorizontal)));
             _playerInfo.PlayerRigidbody2D.velocity = _playerInfo.PlayerRigidbody2D.velocity.Change(x: _newVelocity);
-            if (inputHorizontal < 0 && !_facingRight)
-            {
-                Flip();
-            }
-            if (inputHorizontal > 0 && _facingRight)
+            
+            if ((inputHorizontal < 0 && !_facingRight) || (inputHorizontal > 0 && _facingRight))
             {
                 Flip();
             }

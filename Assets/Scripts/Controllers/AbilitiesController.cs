@@ -15,7 +15,7 @@ namespace GB_Platformer
         {
             for (int i = 0; i < _questObjects.Length; i++)
             {
-                _questObjects[i].QuestItem += qq;
+                _questObjects[i].QuestItem += ApplyAbilities;
             }
         }
 
@@ -23,11 +23,11 @@ namespace GB_Platformer
         {
             for (int i = 0; i < _questObjects.Length; i++)
             {
-                _questObjects[i].QuestItem -= qq;
+                _questObjects[i].QuestItem -= ApplyAbilities;
             }
         }
 
-        private void qq(int questItemId)
+        private void ApplyAbilities(int questItemId)
         {
             switch (questItemId)
             {

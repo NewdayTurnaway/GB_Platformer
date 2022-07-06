@@ -5,9 +5,10 @@ namespace GB_Platformer
     public sealed class GameRoot : MonoBehaviour
     {
         [SerializeField] private GameData _gameData;
-        
-        private GameData _currentGameData;
+
         private Controllers _controllers;
+
+        public GameData GameData { get => _gameData; set => _gameData = value; }
 
         private void Awake()
         {

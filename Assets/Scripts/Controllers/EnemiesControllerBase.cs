@@ -76,11 +76,7 @@ namespace GB_Platformer
 
         private protected void FlipHorizontally(ref bool facingRight, float velocityX, Transform viewTransform)
         {
-            if (velocityX < 0 && !facingRight)
-            {
-                Flip(ref facingRight, viewTransform);
-            }
-            if (velocityX > 0 && facingRight)
+            if ((velocityX < 0 && !facingRight) || (velocityX > 0 && facingRight))
             {
                 Flip(ref facingRight, viewTransform);
             }

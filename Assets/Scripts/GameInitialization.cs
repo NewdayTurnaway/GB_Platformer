@@ -25,7 +25,7 @@
             ExitZone exitZone = new(gameData.ExitDoor, gameData.Exit, gameData.PlayerInfo, spriteAnimator);
 
             new CoinsManager(gameData.PlayerInfo.PlayerView, gameData.Coins, spriteAnimator);
-            new ElevatorManager(gameData.PlayerInfo.PlayerView, gameData.Elevators);
+            new ElevatorManager(gameData.PlayerInfo.PlayerView);
 
             controllers.Add(cameraController);
             controllers.Add(backgroundLayerManager);

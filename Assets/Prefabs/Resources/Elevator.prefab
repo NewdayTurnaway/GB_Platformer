@@ -231,7 +231,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7004905178302509731}
-  - component: {fileID: 993956615}
+  - component: {fileID: 7547168745533738867}
   - component: {fileID: 993956616}
   - component: {fileID: 7004905178302509734}
   - component: {fileID: 7004905178302509728}
@@ -261,7 +261,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &993956615
+--- !u!114 &7547168745533738867
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,9 +270,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7004905178302509735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17bc67003f55df548bade00c0a989e64, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a5a61f289dbba04c8ff212ea850876d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 993956616}
+  _transform: {fileID: 7004905178302509731}
+  _collider2D: {fileID: 7004905178302509734}
+  _rigidbody2D: {fileID: 7004905178302509728}
+  _sliderJoint2D: {fileID: 7004905178302509729}
 --- !u!212 &993956616
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -338,7 +343,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.3}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -349,7 +354,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.92, y: 0.64}
+  m_Size: {x: 1.92, y: 0.5}
   m_EdgeRadius: 0
 --- !u!50 &7004905178302509728
 Rigidbody2D:
@@ -387,7 +392,7 @@ SliderJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: -2.5}
-  m_ConnectedAnchor: {x: 19.84, y: 2.62}
+  m_ConnectedAnchor: {x: 47.4, y: -0.27999997}
   m_AutoConfigureAngle: 0
   m_Angle: 90
   m_UseMotor: 1
