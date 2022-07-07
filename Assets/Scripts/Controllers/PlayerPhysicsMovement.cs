@@ -6,6 +6,7 @@ namespace GB_Platformer
     {
         private bool _isJump;
         private bool _isMove;
+        private bool _facingRight;
 
         private float _inputHorizontal;
         private float _newVelocity;
@@ -53,7 +54,20 @@ namespace GB_Platformer
 
             SetVelocity(_inputHorizontal, Mathf.Lerp(0, _playerInfo.RunSpeed, Mathf.Abs(inputHorizontal)));
             _playerInfo.PlayerRigidbody2D.velocity = _playerInfo.PlayerRigidbody2D.velocity.Change(x: _newVelocity);
-            _playerInfo.PlayerSpriteRenderer.flipX = inputHorizontal < 0;
+            
+            if ((inputHorizontal < 0 && !_facingRight) || (inputHorizontal > 0 && _facingRight))
+            {
+                Flip();
+            }
+        }
+
+        private void Flip()
+        {
+            Vector3 newVector = _playerInfo.PlayerView.Transform.localScale;
+            newVector.x *= -1;
+            _playerInfo.PlayerView.Transform.localScale = newVector;
+
+            _facingRight = !_facingRight;
         }
 
         private void SetVelocity(float inputHorizontal, float speed)
@@ -68,9 +82,12 @@ namespace GB_Platformer
         {
             if (!onGround)
             {
+                _playerInfo.InAir = true;
                 Flying();
                 return;
             }
+
+            _playerInfo.InAir = false;
 
             if (doSomthing)
             {
@@ -78,6 +95,11 @@ namespace GB_Platformer
             }
 
             _spriteAnimator.StartAnimation(_playerInfo.PlayerSpriteRenderer, _isMove ? Track.Run : Track.Idle, true, _playerInfo.AnimationsSpeed);
+
+            if (!_playerInfo.Abilities.AbleJump)
+            {
+                return;
+            }
             JumpAddForce(_isJump);
         }
 

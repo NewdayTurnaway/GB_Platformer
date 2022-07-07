@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GB_Platformer
@@ -7,9 +6,12 @@ namespace GB_Platformer
     public sealed class QuestItemData : ScriptableObject
     {
         [SerializeField] private int _questId;
-        [SerializeField] private List<int> _questItemCollection;
+        [SerializeField] private Sprite _sprite;
+        [TextArea]
+        [SerializeField] private string _itemDescription;
 
         public int QuestId => _questId;
-        public List<int> QuestItemCollection => _questItemCollection;
+        public Sprite Sprite => _sprite;
+        public string ItemDescription => _itemDescription;
     } 
 }

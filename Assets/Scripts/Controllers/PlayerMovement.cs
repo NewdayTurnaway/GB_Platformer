@@ -7,6 +7,7 @@ namespace GB_Platformer
         private bool _isJump;
         private bool _isMove;
         private bool _onGround;
+        private bool _facingRight;
 
         private float _jumpVelocity;
         private float _inputHorizontal;
@@ -50,7 +51,23 @@ namespace GB_Platformer
             }
 
             _playerInfo.PlayerSpriteRenderer.transform.position += Vector3.right * (Time.deltaTime * _playerInfo.RunSpeed * Mathf.Sign(inputHorizontal));
-            _playerInfo.PlayerSpriteRenderer.flipX = inputHorizontal < 0;
+            if (inputHorizontal < 0 && !_facingRight)
+            {
+                Flip();
+            }
+            if (inputHorizontal > 0 && _facingRight)
+            {
+                Flip();
+            }
+        }
+
+        private void Flip()
+        {
+            Vector3 newVector = _playerInfo.PlayerView.Transform.localScale;
+            newVector.x *= -1;
+            _playerInfo.PlayerView.Transform.localScale = newVector;
+
+            _facingRight = !_facingRight;
         }
 
         private void Jump(bool onGround, bool doSomthing)

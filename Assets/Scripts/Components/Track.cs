@@ -2,6 +2,7 @@
 {
     public enum Track
     {
+        None,
         Idle,
         Run,
         Jump,
@@ -30,5 +31,7 @@
         Chest_Active,
         Checkpoint_Default,
         Checkpoint_Active,
+        Exit_Default,
+        Exit_Active
     }
 }

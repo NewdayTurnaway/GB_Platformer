@@ -8,13 +8,15 @@ namespace GB_Platformer
 
         private Controllers _controllers;
 
+        public GameData GameData { get => _gameData; set => _gameData = value; }
+
         private void Awake()
         {
             _controllers = new();
             new GameInitialization(_controllers, _gameData);
             _controllers.Initialization();
         }
-
+        
         private void Update()
         {
             _controllers.Execute();
