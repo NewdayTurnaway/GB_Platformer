@@ -12,7 +12,7 @@
 
         public struct Variables
         {
-            public const float COLLISION_TRESH = 0.1f;
+            public const float COLLISION_THRESHOLD = 0.1f;
             public const float ANIMATIONS_SPEED = 10f;
             public const float DELAY_ATTACK_DISTANCE = 2.5f;
             public const float ATTACK_DISTANCE = 0.25f;

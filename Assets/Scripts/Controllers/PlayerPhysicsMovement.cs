@@ -34,7 +34,7 @@ namespace GB_Platformer
         private void CheckState()
         {
             _isJump = Input.GetAxis(Constants.Input.VERTICAL) > 0;
-            _isMove = Mathf.Abs(_inputHorizontal) > _playerInfo.MovingTresh;
+            _isMove = Mathf.Abs(_inputHorizontal) > _playerInfo.MovingThreshold;
             _contactsPoller.Execute();
             _playerInfo.DoSomething = _spriteAnimator.IsNotLooped(_playerInfo.PlayerSpriteRenderer);
         }
@@ -105,7 +105,7 @@ namespace GB_Platformer
 
         private void JumpAddForce(bool isJump)
         {
-            if (isJump && Mathf.Abs(_playerInfo.PlayerRigidbody2D.velocity.y - _contactsPoller.GroundVelocity.y) <= _playerInfo.FlyTresh)
+            if (isJump && Mathf.Abs(_playerInfo.PlayerRigidbody2D.velocity.y - _contactsPoller.GroundVelocity.y) <= _playerInfo.FlyThreshold)
             {
                 _playerInfo.PlayerRigidbody2D.AddForce(Vector2.up * _playerInfo.JumpForce);
             }
@@ -113,7 +113,7 @@ namespace GB_Platformer
 
         private void Flying()
         {
-            if (Mathf.Abs(_playerInfo.PlayerRigidbody2D.velocity.y) > _playerInfo.FlyTresh)
+            if (Mathf.Abs(_playerInfo.PlayerRigidbody2D.velocity.y) > _playerInfo.FlyThreshold)
             {
                 _spriteAnimator.StartAnimation(_playerInfo.PlayerSpriteRenderer, Track.Jump, true, _playerInfo.AnimationsSpeed);
             }

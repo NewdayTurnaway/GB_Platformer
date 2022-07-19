@@ -28,7 +28,7 @@ namespace GB_Platformer
                 Vector2 normal = _contacts[i].normal;
                 Rigidbody2D rigidbody2D = _contacts[i].rigidbody;
 
-                if (normal.y > Constants.Variables.COLLISION_TRESH)
+                if (normal.y > Constants.Variables.COLLISION_THRESHOLD)
                 {
                     OnGround = true;
 
@@ -40,12 +40,12 @@ namespace GB_Platformer
                     }
                 }
 
-                if (normal.x > Constants.Variables.COLLISION_TRESH && rigidbody2D == null)
+                if (normal.x > Constants.Variables.COLLISION_THRESHOLD && rigidbody2D == null)
                 {
                     HasLeftContacts = true;
                 }
 
-                if (normal.x < -Constants.Variables.COLLISION_TRESH && rigidbody2D == null)
+                if (normal.x < -Constants.Variables.COLLISION_THRESHOLD && rigidbody2D == null)
                 {
                     HasRightContacts = true;
                 }

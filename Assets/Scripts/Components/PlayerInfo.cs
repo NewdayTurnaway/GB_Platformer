@@ -11,8 +11,8 @@ namespace GB_Platformer
         [SerializeField] private float _runSpeed = 150;
         [SerializeField] private float _animationsSpeed = 10;
         [SerializeField] private float _jumpForce = 300;
-        [SerializeField] private float _movingTresh = 0.1f;
-        [SerializeField] private float _flyTresh = 0.1f;
+        [SerializeField] private float _movingThreshold = 0.1f;
+        [SerializeField] private float _flyThreshold = 0.1f;
         [SerializeField] private float _groundLevel = 0.1f;
         [SerializeField] private float _acceleration = -10f;
         [SerializeField] private float _damageAttack1 = 30f;
@@ -30,8 +30,8 @@ namespace GB_Platformer
         public float RunSpeed => _runSpeed;
         public float AnimationsSpeed => _animationsSpeed;
         public float JumpForce => _jumpForce;
-        public float MovingTresh => _movingTresh;
-        public float FlyTresh => _flyTresh;
+        public float MovingThreshold => _movingThreshold;
+        public float FlyThreshold => _flyThreshold;
         public float GroundLevel => _groundLevel;
         public float Acceleration => _acceleration;
         public float DamageAttack1 => _damageAttack1;
